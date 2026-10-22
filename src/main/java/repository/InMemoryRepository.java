@@ -42,7 +42,6 @@ public class InMemoryRepository implements RepositoryInterface {
             throw new ParkingLotException("Entity with ID '" + id + "' not found.");
         }
 
-        // Shift elements down to fill the gap
         for (int i = targetIndex; i < this.size - 1; i++) {
             this.elements[i] = this.elements[i + 1];
         }

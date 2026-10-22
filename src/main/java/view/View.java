@@ -14,7 +14,7 @@ public class View {
         RepositoryInterface repo = new InMemoryRepository(10);
         Controller ctrl = new Controller(repo);
 
-        System.out.println("=== 1. Adding entities to repository ===");
+        System.out.println("1. Adding entities to repository");
         try {
             ctrl.addVehicle(new Car("C1", "red"));
             ctrl.addVehicle(new Car("C2", "blue"));
@@ -27,36 +27,35 @@ public class View {
             System.err.println("Error adding vehicle: " + e.getMessage());
         }
 
-        System.out.println("\n=== 2. Displaying all RED vehicles ===");
+        System.out.println("\n2. Displaying all red vehicles");
         Vehicle[] redVehicles = ctrl.filterRedVehicles();
         for (Vehicle v : redVehicles) {
             System.out.println(v);
         }
 
-        System.out.println("\n=== 3. Testing removal of an entity ===");
+        System.out.println("\n3. Testing removal of an entity");
         try {
-            ctrl.removeVehicle("M1"); // Removing red motorcycle
+            ctrl.removeVehicle("M1");
             System.out.println("Removed vehicle with ID 'M1'.");
         } catch (ParkingLotException e) {
             System.err.println("Error removing vehicle: " + e.getMessage());
         }
 
-        System.out.println("\n=== 4. Displaying all RED vehicles after removal ===");
+        System.out.println("\n4. Displaying all red vehicles after removal");
         redVehicles = ctrl.filterRedVehicles();
         for (Vehicle v : redVehicles) {
             System.out.println(v);
         }
 
-        System.out.println("\n=== 5. Testing Exception Handling ===");
+        System.out.println("\n5. Testing Exception Handling");
         try {
-            // Attempting to remove non-existent entity
             ctrl.removeVehicle("NON_EXISTENT_ID");
         } catch (ParkingLotException e) {
             System.out.println("Caught expected exception: " + e.getMessage());
         }
 
         try {
-            // Attempting duplicate ID addition
+            //duplicate id
             ctrl.addVehicle(new Car("C1", "yellow"));
         } catch (ParkingLotException e) {
             System.out.println("Caught expected exception: " + e.getMessage());
